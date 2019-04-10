@@ -1,0 +1,102 @@
+\documentclass{beamer}
+% \usepackage{xcolor}
+\usepackage{lineno}
+\usepackage{minted}
+% \usemintedstyle{native}
+\usemintedstyle{friendly}
+\graphicspath{ {images/} }
+\usetheme{boxes}
+\setbeamertemplate{blocks}[rounded][shadow=true]
+
+\newenvironment{codeblock}[1]{%
+  \setbeamercolor{block body}{bg=white,fg=black}
+  \setbeamercolor{block title}{bg=gray,fg=white}
+  \begin{block}{#1}}{\end{block}}
+
+\newcommand{\code}[3][]{
+  \begin{codeblock}{#2}
+  \inputminted[fontsize=\scriptsize,#1]{python}{#3}
+  \end{codeblock}
+}
+\title{Camera characterization}
+\subtitle{Python everywhere}
+\author{Federico Ariza}
+\date{\today}
+
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Steps involved}
+  \begin{itemize}
+    \item Image capture
+    \item Data extraction
+    \item Data processing
+    \item Results
+    \item Report generation
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Image capture}
+  \begin{block}{The most difficult part}
+    \begin{itemize}
+      \item Camera interface (USB, GiGe, Cameralink...)\pause
+      \item Libraries available to "speak" with the camera\pause
+      \item Image format (we need to open it!)
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Data extraction}
+  \begin{block}{Get image information}
+    \begin{itemize}
+      \item Load images
+      \item Extract important information (mean, variance, etc...)
+    \end{itemize}
+  \end{block}
+  \code{Python}{code/load_images.py}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Data processing}
+  \begin{block}{This is where the magic happens}
+    \begin{itemize}
+      \item Data analysis
+      \item Regressions
+      \item FFTs
+    \end{itemize}
+  \end{block}
+  \code{Python}{code/process.py}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Results}
+  \begin{block}{Review important information for your specific applicaiton}
+    \begin{itemize}
+      \item How sensitive is the camera?
+      \item How much noise?
+      \item How much the noise increases with teperature?
+      \item Does it perform well in low light?
+      \item How about hight light intensity?
+    \end{itemize}
+  \end{block}
+  \code{Python}{code/results.py}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Report generation}
+  \begin{block}{Put everything inside a pdf using Jinja2}
+    \begin{itemize}
+      \item Results data\pause
+      \item Latex templates\pause
+      \item Generate latex files\pause
+      \item Compile latex
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\end{document}
