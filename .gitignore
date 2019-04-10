@@ -1,0 +1,12 @@
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.gz
+*latexmk
+*.fls
+_minted*
+__pycache__
+.ipynb_checkpoints
